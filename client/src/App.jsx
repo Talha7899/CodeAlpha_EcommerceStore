@@ -1,105 +1,104 @@
-
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import "./App.css";
 
-const initialProducts = [
-  {
-    id: 1,
-    name: "Wireless Headphones",
-    category: "Electronics",
-    price: 4500,
-    oldPrice: 6500,
-    rating: 4.8,
-    reviews: 124,
-    badge: "Best Seller",
-    image:
-      "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=800&q=85",
-  },
-  {
-    id: 2,
-    name: "Smart Watch",
-    category: "Accessories",
-    price: 6500,
-    oldPrice: 9000,
-    rating: 4.7,
-    reviews: 98,
-    badge: "New",
-    image:
-      "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=800&q=85",
-  },
-  {
-    id: 3,
-    name: "Mechanical Keyboard",
-    category: "Electronics",
-    price: 5500,
-    oldPrice: 7500,
-    rating: 4.6,
-    reviews: 76,
-    badge: "Popular",
-    image:
-      "https://images.unsplash.com/photo-1595225476474-87563907a212?auto=format&fit=crop&w=800&q=85",
-  },
-  {
-    id: 4,
-    name: "Wireless Mouse",
-    category: "Accessories",
-    price: 2500,
-    oldPrice: 3500,
-    rating: 4.5,
-    reviews: 62,
-    badge: "",
-    image:
-      "https://images.unsplash.com/photo-1527814050087-3793815479db?auto=format&fit=crop&w=800&q=85",
-  },
-  {
-    id: 5,
-    name: "Laptop",
-    category: "Electronics",
-    price: 85000,
-    oldPrice: 95000,
-    rating: 4.9,
-    reviews: 45,
-    badge: "Hot Deal",
-    image:
-      "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=800&q=85",
-  },
-  {
-    id: 6,
-    name: "Travel Backpack",
-    category: "Fashion",
-    price: 3800,
-    oldPrice: 5000,
-    rating: 4.6,
-    reviews: 51,
-    badge: "Limited Stock",
-    image:
-      "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=800&q=85",
-  },
-  {
-    id: 7,
-    name: "Running Sneakers",
-    category: "Fashion",
-    price: 7200,
-    oldPrice: 9000,
-    rating: 4.7,
-    reviews: 88,
-    badge: "",
-    image:
-      "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=800&q=85",
-  },
-  {
-    id: 8,
-    name: "Modern Table Lamp",
-    category: "Home",
-    price: 3200,
-    oldPrice: 4200,
-    rating: 4.4,
-    reviews: 39,
-    badge: "",
-    image:
-      "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?auto=format&fit=crop&w=800&q=85",
-  },
-];
+// const initialProducts = [
+//   {
+//     id: 1,
+//     name: "Wireless Headphones",
+//     category: "Electronics",
+//     price: 4500,
+//     oldPrice: 6500,
+//     rating: 4.8,
+//     reviews: 124,
+//     badge: "Best Seller",
+//     image:
+//       "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=800&q=85",
+//   },
+//   {
+//     id: 2,
+//     name: "Smart Watch",
+//     category: "Accessories",
+//     price: 6500,
+//     oldPrice: 9000,
+//     rating: 4.7,
+//     reviews: 98,
+//     badge: "New",
+//     image:
+//       "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=800&q=85",
+//   },
+//   {
+//     id: 3,
+//     name: "Mechanical Keyboard",
+//     category: "Electronics",
+//     price: 5500,
+//     oldPrice: 7500,
+//     rating: 4.6,
+//     reviews: 76,
+//     badge: "Popular",
+//     image:
+//       "https://images.unsplash.com/photo-1595225476474-87563907a212?auto=format&fit=crop&w=800&q=85",
+//   },
+//   {
+//     id: 4,
+//     name: "Wireless Mouse",
+//     category: "Accessories",
+//     price: 2500,
+//     oldPrice: 3500,
+//     rating: 4.5,
+//     reviews: 62,
+//     badge: "",
+//     image:
+//       "https://images.unsplash.com/photo-1527814050087-3793815479db?auto=format&fit=crop&w=800&q=85",
+//   },
+//   {
+//     id: 5,
+//     name: "Laptop",
+//     category: "Electronics",
+//     price: 85000,
+//     oldPrice: 95000,
+//     rating: 4.9,
+//     reviews: 45,
+//     badge: "Hot Deal",
+//     image:
+//       "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=800&q=85",
+//   },
+//   {
+//     id: 6,
+//     name: "Travel Backpack",
+//     category: "Fashion",
+//     price: 3800,
+//     oldPrice: 5000,
+//     rating: 4.6,
+//     reviews: 51,
+//     badge: "Limited Stock",
+//     image:
+//       "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=800&q=85",
+//   },
+//   {
+//     id: 7,
+//     name: "Running Sneakers",
+//     category: "Fashion",
+//     price: 7200,
+//     oldPrice: 9000,
+//     rating: 4.7,
+//     reviews: 88,
+//     badge: "",
+//     image:
+//       "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=800&q=85",
+//   },
+//   {
+//     id: 8,
+//     name: "Modern Table Lamp",
+//     category: "Home",
+//     price: 3200,
+//     oldPrice: 4200,
+//     rating: 4.4,
+//     reviews: 39,
+//     badge: "",
+//     image:
+//       "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?auto=format&fit=crop&w=800&q=85",
+//   },
+// ];
 
 const categories = [
   { name: "All", icon: "✦" },
@@ -109,10 +108,63 @@ const categories = [
   { name: "Home", icon: "⌂" },
 ];
 
-const money = (amount) =>
-  `Rs. ${amount.toLocaleString("en-PK")}`;
+const money = (amount) => `Rs. ${amount.toLocaleString("en-PK")}`;
 
 function App() {
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [apiError, setApiError] = useState("");
+
+  useEffect(() => {
+    const controller = new AbortController();
+
+    const fetchProducts = async () => {
+      try {
+        setLoading(true);
+        setApiError("");
+
+        const response = await fetch("http://localhost:5000/api/products", {
+          signal: controller.signal,
+        });
+
+        if (!response.ok) {
+          throw new Error(`API request failed: ${response.status}`);
+        }
+
+        const result = await response.json();
+
+        if (!result.success || !Array.isArray(result.data)) {
+          throw new Error("Unexpected products API response");
+        }
+
+        const normalizedProducts = result.data.map((product) => ({
+          ...product,
+          id: product._id,
+          oldPrice: null,
+          reviews: 0,
+          badge: product.featured ? "Featured" : "",
+        }));
+
+        setProducts(normalizedProducts);
+      } catch (error) {
+        if (error.name !== "AbortError") {
+          console.error("Products fetch failed:", error);
+          setApiError(
+            "Products load nahi ho sake. Backend server check karke dobara try karo."
+          );
+        }
+      } finally {
+        if (!controller.signal.aborted) {
+          setLoading(false);
+        }
+      }
+    };
+
+    fetchProducts();
+
+    return () => controller.abort();
+  }, []);
+
   const [search, setSearch] = useState("");
   const [activeCategory, setActiveCategory] = useState("All");
   const [cart, setCart] = useState([]);
@@ -128,18 +180,17 @@ function App() {
   );
 
   const filteredProducts = useMemo(() => {
-    return initialProducts.filter((product) => {
+    return products.filter((product) => {
       const matchesSearch =
         product.name.toLowerCase().includes(search.toLowerCase()) ||
         product.category.toLowerCase().includes(search.toLowerCase());
 
       const matchesCategory =
-        activeCategory === "All" ||
-        product.category === activeCategory;
+        activeCategory === "All" || product.category === activeCategory;
 
       return matchesSearch && matchesCategory;
     });
-  }, [search, activeCategory]);
+  }, [products, search, activeCategory]);
 
   function addToCart(product) {
     setCart((current) => {
@@ -173,9 +224,7 @@ function App() {
   }
 
   function removeFromCart(productId) {
-    setCart((current) =>
-      current.filter((item) => item.id !== productId)
-    );
+    setCart((current) => current.filter((item) => item.id !== productId));
   }
 
   function toggleWishlist(productId) {
@@ -198,7 +247,9 @@ function App() {
         <a className="brand" href="#home" aria-label="ShopEase home">
           <span className="brand-icon">S</span>
           <span className="brand-copy">
-            <strong>Shop<span>Ease</span></strong>
+            <strong>
+              Shop<span>Ease</span>
+            </strong>
             <small>Better Products. Happier You.</small>
           </span>
         </a>
@@ -216,7 +267,9 @@ function App() {
         </label>
 
         <nav className="desktop-nav">
-          <a className="nav-active" href="#home">Home</a>
+          <a className="nav-active" href="#home">
+            Home
+          </a>
           <a href="#products">Shop</a>
           <a href="#categories">Categories</a>
           <a href="#footer">About</a>
@@ -250,8 +303,7 @@ function App() {
             aria-label={`Open cart, ${cartCount} items`}
             title="Shopping cart"
           >
-            ♧
-            <span className="cart-badge">{cartCount}</span>
+            ♧<span className="cart-badge">{cartCount}</span>
           </button>
 
           <button
@@ -271,15 +323,17 @@ function App() {
       <main id="home">
         <section className="hero">
           <div className="hero-copy">
-            <span className="deal-pill">✦ &nbsp; YOUR EVERYDAY MARKETPLACE</span>
+            <span className="deal-pill">
+              ✦ &nbsp; YOUR EVERYDAY MARKETPLACE
+            </span>
             <h1>
               Upgrade Your
               <br />
               <span>Everyday Essentials.</span>
             </h1>
             <p>
-              Discover top-quality products at prices you'll love.
-              Shop smarter, live better.
+              Discover top-quality products at prices you'll love. Shop smarter,
+              live better.
             </p>
             <a className="primary-button hero-button" href="#products">
               Shop Now <span>→</span>
@@ -288,15 +342,24 @@ function App() {
             <div className="hero-benefits">
               <div>
                 <span className="benefit-icon">↗</span>
-                <span><strong>Free Shipping</strong><small>On orders over Rs. 5,000</small></span>
+                <span>
+                  <strong>Free Shipping</strong>
+                  <small>On orders over Rs. 5,000</small>
+                </span>
               </div>
               <div>
                 <span className="benefit-icon">◇</span>
-                <span><strong>Secure Shopping</strong><small>A smooth shopping experience</small></span>
+                <span>
+                  <strong>Secure Shopping</strong>
+                  <small>A smooth shopping experience</small>
+                </span>
               </div>
               <div>
                 <span className="benefit-icon">☏</span>
-                <span><strong>Customer Support</strong><small>We're here to help</small></span>
+                <span>
+                  <strong>Customer Support</strong>
+                  <small>We're here to help</small>
+                </span>
               </div>
             </div>
           </div>
@@ -351,7 +414,9 @@ function App() {
           <div className="products-heading">
             <div>
               <span className="eyebrow">HANDPICKED FOR YOU</span>
-              <h2>Featured Products<span className="heading-dot">.</span></h2>
+              <h2>
+                Featured Products<span className="heading-dot">.</span>
+              </h2>
               <p>Good finds. Great prices. All in one place.</p>
             </div>
 
@@ -375,12 +440,33 @@ function App() {
             ))}
           </div>
 
-          {filteredProducts.length > 0 ? (
+          {loading ? (
+            <div className="empty-products">
+              <h3>Loading products...</h3>
+              <p>Please wait while we fetch products from the database.</p>
+            </div>
+          ) : apiError ? (
+            <div className="empty-products">
+              <h3>Unable to load products</h3>
+              <p>{apiError}</p>
+              <button
+                className="primary-button"
+                onClick={() => window.location.reload()}
+              >
+                Try Again
+              </button>
+            </div>
+          ) : filteredProducts.length > 0 ? (
             <div className="product-grid">
               {filteredProducts.map((product) => {
-                const discount = Math.round(
-                  ((product.oldPrice - product.price) / product.oldPrice) * 100
-                );
+                const discount =
+                  product.oldPrice && product.oldPrice > product.price
+                    ? Math.round(
+                        ((product.oldPrice - product.price) /
+                          product.oldPrice) *
+                          100
+                      )
+                    : null;
 
                 return (
                   <article className="product-card" key={product.id}>
@@ -418,7 +504,9 @@ function App() {
                     </div>
 
                     <div className="product-details">
-                      <span className="product-category">{product.category}</span>
+                      <span className="product-category">
+                        {product.category}
+                      </span>
                       <h3>{product.name}</h3>
 
                       <div className="rating-line">
@@ -430,9 +518,13 @@ function App() {
                       <div className="price-row">
                         <div className="price-group">
                           <strong>{money(product.price)}</strong>
+                          {product.oldPrice && (
                           <del>{money(product.oldPrice)}</del>
+                          )}
                         </div>
+                        {discount !== null && (
                         <span className="discount-badge">{discount}% OFF</span>
+)}
                       </div>
 
                       <button
@@ -484,7 +576,9 @@ function App() {
               aria-label="Email address"
               required
             />
-            <button className="primary-button" type="submit">Join us →</button>
+            <button className="primary-button" type="submit">
+              Join us →
+            </button>
           </form>
         </section>
       </main>
@@ -494,7 +588,9 @@ function App() {
           <a className="brand footer-brand" href="#home">
             <span className="brand-icon">S</span>
             <span className="brand-copy">
-              <strong>Shop<span>Ease</span></strong>
+              <strong>
+                Shop<span>Ease</span>
+              </strong>
               <small>Better Products. Happier You.</small>
             </span>
           </a>
@@ -527,7 +623,11 @@ function App() {
         </div>
       </footer>
 
-      {notice && <div className="toast" role="status">{notice}</div>}
+      {notice && (
+        <div className="toast" role="status">
+          {notice}
+        </div>
+      )}
 
       {cartOpen && (
         <div
@@ -540,7 +640,9 @@ function App() {
             <div className="drawer-header">
               <div>
                 <span className="eyebrow">YOUR SELECTION</span>
-                <h2>Your Cart <span>({cartCount})</span></h2>
+                <h2>
+                  Your Cart <span>({cartCount})</span>
+                </h2>
               </div>
               <button
                 className="close-button"
@@ -619,7 +721,10 @@ function App() {
                     <span>Total</span>
                     <strong>{money(subtotal)}</strong>
                   </div>
-                  <button className="primary-button checkout-button" onClick={checkout}>
+                  <button
+                    className="primary-button checkout-button"
+                    onClick={checkout}
+                  >
                     Continue to Checkout <span>→</span>
                   </button>
                   <button
